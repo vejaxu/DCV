@@ -101,7 +101,7 @@ def Test(args, Model, data, target, optimizer, epoch, torch_format=False):
 
 def main(args):
 
-    path = tool.GetPath(args['name'])
+    path = tool.GetPath(args['name'], args['alpha'], args['sigma'])
     tool.SaveParam(path, args)
     tool.SetSeed(args['seed'])
 
@@ -146,7 +146,7 @@ def main(args):
 
             # gifPloterLatentTrain.AddNewFig(em_train[0], y_pred, path=path, name='train_epoch{}_cluster_{}.png'.format(epoch, tool.cluster_acc(label_train.detach().cpu().numpy(), y_pred)), args=args)
             if args['pretrain'] == 1:
-                torch.save(Model.state_dict(), "model/model_{}.pkl".format(args['data_name']))
+                torch.save(Model.state_dict(), "model/model_{}_alpha_{}_sigma{}.pkl".format(args['data_name'], args['alpha'], args['sigma']))
 
 
         if epoch % args['log_interval'] == 0:
