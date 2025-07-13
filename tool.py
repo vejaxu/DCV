@@ -116,10 +116,10 @@ def SetSeed(seed):
     np.random.seed(SEED)
 
 
-def GetPath(name):
+def GetPath(name, alpha, sigma):
 
     rest = time.strftime("%Y%m%d%H%M%S_", time.localtime()) + os.popen('git rev-parse HEAD').read()
-    path = 'log/' + name + '/'
+    path = 'log/' + name + '/' + 'alpha_' + str(alpha) + '_sigma_' + str(sigma) + '/'
     if not os.path.exists(path):
         os.makedirs(path)
 
