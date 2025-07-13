@@ -112,7 +112,7 @@ def main(args):
 
     Model = model_DCV.LISV2_MLP(data_train, device=device, args=args).to(device)
     if args['pretrain'] == 2:
-        Model.load_state_dict(torch.load("model/model_{}.pkl".format(args['data_name'])))
+        Model.load_state_dict(torch.load("model/model_{}_alpha_{}_sigma{}.pkl".format(args['data_name'], args['alpha'], args['sigma'])))
     optimizer = optim.Adam(Model.parameters(), lr=args['lr'])
 
     best_epoch = 0
