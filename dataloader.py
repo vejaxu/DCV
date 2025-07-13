@@ -102,6 +102,7 @@ def GetData(args):
         data = sio.loadmat('/home/xwj/aaa/clustering/data/AC.mat')
         x_train = data['data']
         y_train = data['class'].flatten()
+        data_row = x_train.astype(np.float32)
 
         x_min = x_train.min(axis=0)
         x_max = x_train.max(axis=0)
@@ -116,6 +117,7 @@ def GetData(args):
         data = sio.loadmat('/home/xwj/aaa/clustering/data/sparse_3_dense_3_dense_3.mat')
         x_train = data['data']
         y_train = data['class'].flatten()
+        data_row = x_train.astype(np.float32)
 
         x_min = x_train.min(axis=0)
         x_max = x_train.max(axis=0)
@@ -130,6 +132,7 @@ def GetData(args):
         data = sio.loadmat('/home/xwj/aaa/clustering/data/sparse_8_dense_1_dense_1.mat')
         x_train = data['data']
         y_train = data['class'].flatten()
+        data_row = x_train.astype(np.float32)
 
         x_min = x_train.min(axis=0)
         x_max = x_train.max(axis=0)
@@ -144,6 +147,7 @@ def GetData(args):
         data = sio.loadmat('/home/xwj/aaa/clustering/data/one_gaussian_10_one_line_5_2.mat')
         x_train = data['data']
         y_train = data['class'].flatten()
+        data_row = x_train.astype(np.float32)
 
         x_min = x_train.min(axis=0)
         x_max = x_train.max(axis=0)
@@ -158,6 +162,7 @@ def GetData(args):
         data = sio.loadmat('/home/xwj/aaa/clustering/data/sparse_3_dense_3_dense_3_10.mat')
         x_train = data['all_data']
         y_train = data['all_labels'].flatten()
+        data_row = x_train.astype(np.float32)
 
         x_min = x_train.min(axis=0)
         x_max = x_train.max(axis=0)
@@ -172,6 +177,7 @@ def GetData(args):
         data = sio.loadmat('/home/xwj/aaa/clustering/data/sparse_8_dense_1_dense_1_10.mat')
         x_train = data['all_data']
         y_train = data['all_labels'].flatten()
+        data_row = x_train.astype(np.float32)
 
         x_min = x_train.min(axis=0)
         x_max = x_train.max(axis=0)
@@ -186,6 +192,7 @@ def GetData(args):
         data = sio.loadmat('/home/xwj/aaa/clustering/data/one_gaussian_10_one_line_5_2_10.mat')
         x_train = data['all_data']
         y_train = data['all_labels'].flatten()
+        data_row = x_train.astype(np.float32)
 
         x_min = x_train.min(axis=0)
         x_max = x_train.max(axis=0)
@@ -198,5 +205,6 @@ def GetData(args):
 
     data_train = torch.tensor(data_train)
     label_train = torch.tensor(label_train)
+    data_row = torch.tensor(data_row) if 'data_row' in locals() else None
 
-    return data_train.float(), label_train
+    return data_train.float(), label_train, data_row

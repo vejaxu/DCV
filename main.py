@@ -14,6 +14,10 @@ import dataloader
 import model as model_DCV
 
 
+from sklearn.manifold import TSNE
+import matplotlib.pyplot as plt
+
+
 warnings.filterwarnings("ignore", category=Warning)
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -101,7 +105,7 @@ def main(args):
     tool.SaveParam(path, args)
     tool.SetSeed(args['seed'])
 
-    data_train, label_train = dataloader.GetData(args)
+    data_train, label_train, data_row = dataloader.GetData(args)
 
     gifPloterLatentTrain = tool.GIFPloter()
     DataSaver = tool.DataSaver()
@@ -111,6 +115,7 @@ def main(args):
         Model.load_state_dict(torch.load("model/model_{}.pkl".format(args['data_name'])))
     optimizer = optim.Adam(Model.parameters(), lr=args['lr'])
 
+    best_epoch = 0
     best_nmi = 0
     best_ari = 0
 
@@ -159,9 +164,33 @@ def main(args):
             dec_acc = tool.cluster_acc(label_train.detach().cpu().numpy(), y_pred)
             dec_nmi = nmi_score(label_train.detach().cpu().numpy(), y_pred)
             dec_ari = ari_score(label_train.detach().cpu().numpy(), y_pred)
+
+
+            if data_row.shape[1] > 2:
+                tsne_input = TSNE(n_components=2, random_state=42)
+                x_2d = tsne_input.fit_transform(data_row.detach().cpu().numpy())
+            else:
+                x_2d = data_row.detach().cpu().numpy()
+            def plot_tsne(X_2d, labels, title, subplot_idx):
+                plt.subplot(1, 2, subplot_idx)
+                scatter = plt.scatter(X_2d[:, 0], X_2d[:, 1], c=labels, cmap='viridis', alpha=0.7, s=15)
+                plt.title(title)
+                plt.xlabel("Dimension 1")
+                plt.ylabel("Dimension 2")
+                plt.colorbar(scatter, label='Class Labels')
+                plt.grid(True)
+                plt.axis('equal')
+            plt.figure(figsize=(12, 6))
+            plot_tsne(x_2d, label_train, "True Labels", 1)
+            plot_tsne(x_2d, y_pred, "DCV", 2)
+            plt.tight_layout()
+            plt.savefig(f"{path}/epoch_{epoch:03d}.jpg", dpi=300)
+
+
             if best_nmi < dec_nmi:
                 best_nmi = dec_nmi
                 best_ari = dec_ari
+                best_epoch = epoch
             print('Train Epoch {} : {}, {}, {}, {}, {}'.format(epoch, vis_acc, clu_acc, dec_acc, dec_nmi, dec_ari))
 
             # gifPloterLatentTrain.AddNewFig(em_train[0], label_train.detach().cpu().numpy(), path=path, name='train_epoch{}_em2.png'.format(epoch), args=args)
@@ -178,7 +207,7 @@ def main(args):
             # with open("log/results.txt","a+") as files:
             #     files.write('{} {} {} | {} {} {} {} | Train Epoch {} : {}, {}, {}, {}\n'.format(args['perplexity'], args['batch_size'], args['ratio'][3], args['alpha'], args['sigma'], args['ratio'][4], args['vtrace_out'][1], epoch, vis_acc, clu_acc, dec_acc, dec_nmi, dec_ari))
             #     files.flush() 
-    print(f"Best NMI: {best_nmi}, Best ARI: {best_ari}")
+    print(f"Epoch {best_epoch}: Best NMI: {best_nmi}, Best ARI: {best_ari}")
 
 
 if __name__ == "__main__":
