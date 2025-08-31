@@ -113,6 +113,21 @@ def GetData(args):
         data_train = x_train.reshape((x_train.shape[0], -1)).astype(np.float32)
         label_train = y_train.astype(np.int32)
 
+    elif args["data_name"] == "4C":
+        data = sio.loadmat('/home/xwj/aaa/clustering/data/4C.mat')
+        x_train = data['data']
+        y_train = data['class'].flatten()
+        data_row = x_train.astype(np.float32)
+
+        x_min = x_train.min(axis=0)
+        x_max = x_train.max(axis=0)
+        x_range = x_max - x_min
+        eps = 1e-8
+        x_train = (x_train - x_min) / (x_range + eps)
+        
+        data_train = x_train.reshape((x_train.shape[0], -1)).astype(np.float32)
+        label_train = y_train.astype(np.int32)
+
     elif args["data_name"] == "sparse_3_dense_3_dense_3":
         data = sio.loadmat('/home/xwj/aaa/clustering/data/sparse_3_dense_3_dense_3.mat')
         x_train = data['data']
