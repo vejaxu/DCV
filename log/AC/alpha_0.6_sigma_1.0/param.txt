@@ -1,0 +1,84 @@
+{
+    "name": "AC",
+    "data_name": "AC",
+    "n_cluster": 2,
+    "pretrain": 1,
+    "perplexity": 3,
+    "vtrace_in": [
+        0.001,
+        0.001
+    ],
+    "vtrace_out": [
+        0.001,
+        0.1
+    ],
+    "NetworkStructure": [
+        -1,
+        1000,
+        500,
+        300,
+        100,
+        50,
+        30,
+        2
+    ],
+    "clu_dim": 100,
+    "rec_index": 4,
+    "ratio": [
+        1.0,
+        0.0,
+        0.0,
+        0.05,
+        0.005
+    ],
+    "alpha": 0.6,
+    "sigma": 1.0,
+    "batch_size": 500,
+    "pre_epochs": 500,
+    "epochs": 500,
+    "lr": 0.001,
+    "seed": 0,
+    "log_interval": 50
+}
+{
+    "name": "AC",
+    "data_name": "AC",
+    "n_cluster": 2,
+    "pretrain": 2,
+    "perplexity": 3,
+    "vtrace_in": [
+        0.001,
+        0.001
+    ],
+    "vtrace_out": [
+        0.001,
+        0.1
+    ],
+    "NetworkStructure": [
+        -1,
+        1000,
+        500,
+        300,
+        100,
+        50,
+        30,
+        2
+    ],
+    "clu_dim": 100,
+    "rec_index": 4,
+    "ratio": [
+        1.0,
+        0.0,
+        0.0,
+        0.05,
+        0.005
+    ],
+    "alpha": 0.6,
+    "sigma": 1.0,
+    "batch_size": 500,
+    "pre_epochs": 500,
+    "epochs": 500,
+    "lr": 0.001,
+    "seed": 0,
+    "log_interval": 50
+}

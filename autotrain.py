@@ -31,8 +31,8 @@ sigma_list = [0.5, 1.0, 3.0, 5.0, 8.0, 10.0]
 for alpha in alpha_list:
     for sigma in sigma_list:
         
-#         cmd.append('python main.py --name AC --data_name AC --n_cluster 2 --pretrain 2 --epochs 500 --log_interval 50 --perplexity 3 --batch_size 500 --ratio 1.0 0.0 0.0 0.05 0.005 --alpha {alpha} --sigma {sigma} --vtrace_out 0.001 0.1'.format(alpha=alpha, sigma=sigma))
-        cmd.append('python main.py --name 4C --data_name 4C --n_cluster 4 --pretrain 2 --epochs 500 --log_interval 50 --perplexity 3 --batch_size 500 --ratio 1.0 0.0 0.0 0.05 0.005 --alpha {alpha} --sigma {sigma} --vtrace_out 0.001 0.1'.format(alpha=alpha, sigma=sigma))
+        cmd.append('python main.py --name AC --data_name AC --n_cluster 2 --pretrain 2 --epochs 500 --log_interval 50 --perplexity 3 --batch_size 500 --ratio 1.0 0.0 0.0 0.05 0.005 --alpha {alpha} --sigma {sigma} --vtrace_out 0.001 0.1'.format(alpha=alpha, sigma=sigma))
+#         cmd.append('python main.py --name 4C --data_name 4C --n_cluster 4 --pretrain 2 --epochs 500 --log_interval 50 --perplexity 3 --batch_size 500 --ratio 1.0 0.0 0.0 0.05 0.005 --alpha {alpha} --sigma {sigma} --vtrace_out 0.001 0.1'.format(alpha=alpha, sigma=sigma))
 #         cmd.append('python main.py --name sparse_3_dense_3_dense_3 --data_name sparse_3_dense_3_dense_3 --n_cluster 3 --pretrain 2 --epochs 500 --log_interval 50 --perplexity 3 --batch_size 500 --ratio 1.0 0.0 0.0 0.05 0.005 --alpha {alpha} --sigma {sigma} --vtrace_out 0.001 0.1'.format(alpha=alpha, sigma=sigma))
 #         cmd.append('python main.py --name sparse_8_dense_1_dense_1 --data_name sparse_8_dense_1_dense_1 --n_cluster 3 --pretrain 2 --epochs 500 --log_interval 50 --perplexity 3 --batch_size 500 --ratio 1.0 0.0 0.0 0.05 0.005 --alpha {alpha} --sigma {sigma} --vtrace_out 0.001 0.1'.format(alpha=alpha, sigma=sigma))
 #         cmd.append('python main.py --name one_gaussian_10_one_line_5_2 --data_name one_gaussian_10_one_line_5_2 --n_cluster 2 --pretrain 2 --epochs 500 --log_interval 50 --perplexity 3 --batch_size 500 --ratio 1.0 0.0 0.0 0.05 0.005 --alpha {alpha} --sigma {sigma} --vtrace_out 0.001 0.1'.format(alpha=alpha, sigma=sigma))
